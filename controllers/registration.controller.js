@@ -136,11 +136,13 @@ const deleteRegistration = async (req, res) => {
             })
         }
         // if exists
+        // await registerDelete.destroy();
         await registerDelete.update({ status: 'cancelled' });
         // response
         res.status(200).json({
             status: 'success',
             data: {
+                // message: 'registration deleted'
                 registerDelete
             }
         })
