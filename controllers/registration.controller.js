@@ -39,4 +39,39 @@ const addRegistration = async (req, res) => {
     }
 }
 
-module.exports = { getAllRegistrations, addRegistration };
+const getRegistrationUnique = async (req, res) => {
+    try {
+        // get id
+        const { id } = req.params;
+
+        // find registration
+        const registration = await Registration.findOne({
+            where: {
+                id
+            }
+        })
+
+        // if not exists
+        if( !registration ) {
+            return res.status(404).json({
+                status: 'error',
+                data: {
+                    message: 'registration not found'
+                }
+            })
+        }
+
+        // if exists
+        res.status(200).json({
+            status: 'success',
+            data: {
+                registration
+            }
+        })
+
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+module.exports = { getAllRegistrations, addRegistration, getRegistrationUnique };
