@@ -8,7 +8,7 @@ app.use(express.json());
 const { registrationRouter } = require('./routes/registration.router')
 
 // define endpoints
-app.use('/registrations', registrationRouter)
+app.use('/api/v1/registrations', registrationRouter)
 
 // if endpoints failed
 app.all('*', (req, res) => {

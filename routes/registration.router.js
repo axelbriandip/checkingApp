@@ -15,7 +15,7 @@ const {
 registrationRouter.get('/', getAllRegistrations);
 registrationRouter.get('/:id', getRegistrationUnique);
 registrationRouter.post('/', addRegistration);
-registrationRouter.patch('/:id', markedExit);
+registrationRouter.patch('/exit/:id', markedExit);
 registrationRouter.patch('/delete/:id', deleteRegister);
 
 // export 
