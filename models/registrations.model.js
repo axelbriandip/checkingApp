@@ -1,25 +1,24 @@
-const { DataTypes } = require('sequelize');
-const { database } = require('../utils/database.util');
+const { database, DataTypes } = require('../utils/database.util');
 
-const Registration = database.define('registration', {
+const Registration = database.define('registrations', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: true // NO permite valores nulos
+        allowNull: false // NO permite valores nulos
     },
     entranceTime: {
-        type: DataTypes.STRING,
-        allowNull: true // NO permite valores nulos
+        type: DataTypes.DATE,
+        allowNull: false // NO permite valores nulos
     },
     exitTime: {
-        type: DataTypes.STRING,
-        allowNull: true // NO permite valores nulos
+        type: DataTypes.DATE,
+        allowNull: true // SI permite valores nulos
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: true, // NO permite valores nulos
-        defaultValue: 'working'
+        allowNull: false, // NO permite valores nulos
+        defaultValue: "working"
     }
 })
 

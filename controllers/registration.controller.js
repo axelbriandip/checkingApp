@@ -1,3 +1,5 @@
+// 2022-08-22 19:30:30
+
 const { Registration } = require('../models/registrations.model');
 
 const getAllRegistrations = async (req, res) => {
@@ -17,18 +19,17 @@ const getAllRegistrations = async (req, res) => {
 
 const addRegistration = async (req, res) => {
     try {
-        // received dates
-        const { entranceTime, exitTime } = req.body;
+        // received register
+        const { entranceTime } = req.body;
 
-        // create registration
+        // create register
         const newRegistration = await Registration.create({
-            entranceTime,
-            exitTime
+            entranceTime
         })
 
         // response
-        res.status(201).json({
-            status: 'success',
+        res.status(200).json({
+            status: "success",
             data: {
                 newRegistration
             }

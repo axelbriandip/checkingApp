@@ -1,4 +1,4 @@
-const { Sequelize } = require('sequelize');
+const { Sequelize, DataTypes } = require('sequelize');
 
 // establish connection to db
 const database = new Sequelize({
@@ -11,4 +11,4 @@ const database = new Sequelize({
     logging: false
 })
 
-module.exports = { database };
+module.exports = { database, DataTypes };
