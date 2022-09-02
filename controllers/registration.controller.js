@@ -83,14 +83,14 @@ const markedExit = async (req, res) => {
         const { exitTime } = req.body;
         const { id } = req.params;
 
-        // verificar si el usuario existe o no
+        // verify if register exists
         const registerExit = await Registration.findOne({
             where: {
                 id
             }
         })
 
-        // si no existe..
+        // if not exists
         if ( !registerExit ) {
             return res.status(404).json({
                 status: "error",
@@ -98,16 +98,7 @@ const markedExit = async (req, res) => {
             })
         }
 
-        // si existe..
-
-        // método 1 - update
-        // const updatedUser = await User.update({ name }, {
-        //     where: {
-        //         id: id
-        //     }
-        // })
-
-        // método 2 - update
+        // if exists
         await registerExit.update({
             exitTime,
             status: 'out'
@@ -125,9 +116,41 @@ const markedExit = async (req, res) => {
     }
 }
 
+const deleteRegister = async (req, res) => {
+    try {
+        // get id
+        const { id } = req.params;
+        // find
+        const registerDelete = await Registration.findOne({ where: { id } })
+        // if not exists
+        if( !registerDelete ) {
+            return res.status(404).json({
+                status: 'error',
+                data: {
+                    message: 'register not found'
+                }
+            })
+        }
+        // if exists
+        await registerDelete.update({
+            status: 'cancelled'
+        });
+        // response
+        res.status(200).json({
+            status: 'success',
+            data: {
+                registerDelete
+            }
+        })
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     getAllRegistrations,
     addRegistration,
     getRegistrationUnique,
-    markedExit
+    markedExit,
+    deleteRegister
 };
