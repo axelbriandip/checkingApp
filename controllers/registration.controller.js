@@ -79,8 +79,13 @@ const markedExit = async (req, res) => {
         const { exitTime } = req.body;
         const { id } = req.params;
 
-        // find registration
-        const registerExit = await Registration.findOne({ where: { id } })
+        // find registration -  ONLY work with registrations in 'working'
+        const registerExit = await Registration.findOne({
+            where: {
+                id,
+                status: 'working'
+            }
+        })
 
         // if not exists
         if ( !registerExit ) {
@@ -114,8 +119,13 @@ const deleteRegistration = async (req, res) => {
     try {
         // received id
         const { id } = req.params;
-        // find registration
-        const registerDelete = await Registration.findOne({ where: { id } })
+        // find registration -  ONLY work with registrations in 'working'
+        const registerDelete = await Registration.findOne({
+            where: {
+                id,
+                status: 'working'
+            }
+        })
         // if not exists
         if( !registerDelete ) {
             return res.status(404).json({
