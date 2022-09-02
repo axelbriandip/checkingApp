@@ -31,7 +31,7 @@ const addRegistration = async (req, res) => {
         const newRegistration = await Registration.create({ entranceTime })
 
         // response
-        res.status(200).json({
+        res.status(201).json({
             status: "success",
             data: {
                 newRegistration
@@ -47,7 +47,7 @@ const getRegistrationUnique = async (req, res) => {
         // received id
         const { id } = req.params;
 
-        // find registration
+        // find registration - all status included
         const registration = await Registration.findOne({ where: { id } })
 
         // if not exists
@@ -136,13 +136,12 @@ const deleteRegistration = async (req, res) => {
             })
         }
         // if exists
-        // await registerDelete.destroy();
+        // await registerDelete.destroy(); // permanently delete
         await registerDelete.update({ status: 'cancelled' });
         // response
-        res.status(200).json({
+        res.status(204).json({
             status: 'success',
             data: {
-                // message: 'registration deleted'
                 registerDelete
             }
         })

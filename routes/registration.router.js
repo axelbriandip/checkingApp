@@ -15,9 +15,8 @@ const {
 registrationRouter.get('/', getAllRegistrations);
 registrationRouter.get('/:id', getRegistrationUnique);
 registrationRouter.post('/', addRegistration);
-registrationRouter.patch('/exit/:id', markedExit);
-// registrationRouter.delete('/delete/:id', deleteRegistration);
-registrationRouter.patch('/delete/:id', deleteRegistration);
+registrationRouter.patch('/:id', markedExit);
+registrationRouter.delete('/:id', deleteRegistration);
 
 // export 
 module.exports = { registrationRouter };
