@@ -1,19 +1,20 @@
-// 2022-08-22 19:30:30
-
 const { Registration } = require('../models/registrations.model');
 
 const getAllRegistrations = async (req, res) => {
     try {
-        const registrations = await Registration.findAll({
+        // get all registrations
+        const allRegistrations = await Registration.findAll({
             where: {
+                // filter for status
                 status: 'working'
             }
         });
 
+        // response
         res.status(200).json({
             status: 'success',
             data: {
-                registrations
+                allRegistrations
             }
         })
     } catch (err) {
@@ -23,13 +24,11 @@ const getAllRegistrations = async (req, res) => {
 
 const addRegistration = async (req, res) => {
     try {
-        // received register
+        // received registration
         const { entranceTime } = req.body;
 
-        // create register
-        const newRegistration = await Registration.create({
-            entranceTime
-        })
+        // create registration
+        const newRegistration = await Registration.create({ entranceTime })
 
         // response
         res.status(200).json({
@@ -45,22 +44,18 @@ const addRegistration = async (req, res) => {
 
 const getRegistrationUnique = async (req, res) => {
     try {
-        // get id
+        // received id
         const { id } = req.params;
 
         // find registration
-        const registration = await Registration.findOne({
-            where: {
-                id
-            }
-        })
+        const registration = await Registration.findOne({ where: { id } })
 
         // if not exists
         if( !registration ) {
             return res.status(404).json({
-                status: 'error',
+                status: 'Error',
                 data: {
-                    message: 'registration not found'
+                    message: 'Registration not found'
                 }
             })
         }
@@ -80,21 +75,20 @@ const getRegistrationUnique = async (req, res) => {
 
 const markedExit = async (req, res) => {
     try {
+        // received exitTime and id
         const { exitTime } = req.body;
         const { id } = req.params;
 
-        // verify if register exists
-        const registerExit = await Registration.findOne({
-            where: {
-                id
-            }
-        })
+        // find registration
+        const registerExit = await Registration.findOne({ where: { id } })
 
         // if not exists
         if ( !registerExit ) {
             return res.status(404).json({
-                status: "error",
-                message: "Register not found"
+                status: "Error",
+                data: {
+                    message: "Registration not found"
+                }
             })
         }
 
@@ -116,25 +110,23 @@ const markedExit = async (req, res) => {
     }
 }
 
-const deleteRegister = async (req, res) => {
+const deleteRegistration = async (req, res) => {
     try {
-        // get id
+        // received id
         const { id } = req.params;
-        // find
+        // find registration
         const registerDelete = await Registration.findOne({ where: { id } })
         // if not exists
         if( !registerDelete ) {
             return res.status(404).json({
-                status: 'error',
+                status: 'Error',
                 data: {
-                    message: 'register not found'
+                    message: 'Registration not found'
                 }
             })
         }
         // if exists
-        await registerDelete.update({
-            status: 'cancelled'
-        });
+        await registerDelete.update({ status: 'cancelled' });
         // response
         res.status(200).json({
             status: 'success',
@@ -152,5 +144,5 @@ module.exports = {
     addRegistration,
     getRegistrationUnique,
     markedExit,
-    deleteRegister
+    deleteRegistration
 };

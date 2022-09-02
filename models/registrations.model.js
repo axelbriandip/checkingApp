@@ -5,19 +5,19 @@ const Registration = database.define('registrations', {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        allowNull: false // NO permite valores nulos
+        allowNull: false // NOT null values
     },
     entranceTime: {
         type: DataTypes.DATE,
-        allowNull: false // NO permite valores nulos
+        allowNull: false // NOT null values
     },
     exitTime: {
         type: DataTypes.DATE,
-        allowNull: true // SI permite valores nulos
+        allowNull: true // YES, can be null value
     },
     status: {
         type: DataTypes.STRING,
-        allowNull: false, // NO permite valores nulos
+        allowNull: false, // NOT null values
         defaultValue: "working"
     }
 })

@@ -8,7 +8,7 @@ const {
     addRegistration,
     getRegistrationUnique,
     markedExit,
-    deleteRegister
+    deleteRegistration
 } = require('../controllers/registration.controller');
 
 // endpoints
@@ -16,7 +16,7 @@ registrationRouter.get('/', getAllRegistrations);
 registrationRouter.get('/:id', getRegistrationUnique);
 registrationRouter.post('/', addRegistration);
 registrationRouter.patch('/exit/:id', markedExit);
-registrationRouter.patch('/delete/:id', deleteRegister);
+registrationRouter.patch('/delete/:id', deleteRegistration);
 
 // export 
 module.exports = { registrationRouter };

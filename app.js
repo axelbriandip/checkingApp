@@ -13,7 +13,7 @@ app.use('/api/v1/registrations', registrationRouter)
 // if endpoints failed
 app.all('*', (req, res) => {
     res.status(404).json({
-        status: 'error',
+        status: 'Error',
         data: {
             message: `${req.method} ${req.url} no exists in your server`
         }
