@@ -6,13 +6,15 @@ const registrationRouter = express.Router();
 const {
     getAllRegistrations,
     addRegistration,
-    getRegistrationUnique
+    getRegistrationUnique,
+    markedExit
 } = require('../controllers/registration.controller');
 
 // endpoints
 registrationRouter.get('/', getAllRegistrations);
 registrationRouter.get('/:id', getRegistrationUnique);
 registrationRouter.post('/', addRegistration);
+registrationRouter.patch('/:id', markedExit);
 
 // export 
 module.exports = { registrationRouter };
